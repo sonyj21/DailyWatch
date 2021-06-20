@@ -6,7 +6,7 @@ import {
     Navbar,
 } from "@blueprintjs/core";
 
-const Nav = () => {
+const Nav = ({weatherClick}) => {
     return (
         <Navbar className="bp3-dark">
             <Navbar.Group align={Alignment.LEFT}>
@@ -15,8 +15,7 @@ const Nav = () => {
             </Navbar.Group>
             <Navbar.Group align={Alignment.RIGHT}>
                 <Navbar.Divider />
-                <Button className="bp3-minimal" icon="home" text="Home" />
-                <Button className="bp3-minimal" icon="document" text="Files" />
+                <Button className="bp3-minimal" icon="cloud" text="Weather" onClick={weatherClick} />
             </Navbar.Group>
         </Navbar>
     )

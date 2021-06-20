@@ -1,24 +1,35 @@
-import React,{useEffect} from "react"
+import React,{useCallback, useEffect,useState} from "react"
 import Nav from '../../components/Navbar'
 import NewsListing from '../../components/NewsListing'
+import WeatherModal from '../../components/WeatherModal'
 import {FetchTopHeadLines} from '../../actions/topHeadlines'
+import {FetchWeatherDetails} from '../../actions/weatherDetails'
 import { connect } from "react-redux";
-const Home = ({FetchTopHeadLines,topNews}) =>{
-   
+const Home = ({FetchTopHeadLines,FetchWeatherDetails,topNews,weatherDetails}) =>{
+    const [isWeatherOpen,setWeatherOPen] = useState(false)
     useEffect(()=>{
         FetchTopHeadLines();
+        FetchWeatherDetails()
     },[])
-    console.log("ooooooooooooooooooooooooo",topNews)
+    const weatherClick= useCallback(()=>{
+        setWeatherOPen(true)
+    },[])
+    const handleErrorClose= useCallback(()=>{
+        console.log("ooooooooooooooooooooooooo")
+        setWeatherOPen(false)
+    },[])
+    
     return(
         <>
-        <Nav />
+        <Nav weatherClick={weatherClick} />
         <br />
-        <NewsListing topNews={topNews} />
+        <NewsListing topNews={topNews}  />
+        <WeatherModal isWeatherOpen={isWeatherOpen} weatherDetails={weatherDetails} handleErrorClose={handleErrorClose} />
         </>
     )
 }
 const mapStateToProps = (state) => {
-    return { topNews: state.topHeadNews.topHeadLines };
+    return { topNews: state.topHeadNews.topHeadLines,weatherDetails:state.weatherData.weatherDetails };
   };
   
-export default connect(mapStateToProps, { FetchTopHeadLines })(Home);
+export default connect(mapStateToProps, { FetchTopHeadLines,FetchWeatherDetails })(Home);

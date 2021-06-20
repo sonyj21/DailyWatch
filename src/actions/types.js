@@ -1,0 +1,1 @@
+export const TOP_HEAD_LINES = 'TOP_HEAD_LINES';

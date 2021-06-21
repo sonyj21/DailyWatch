@@ -8,14 +8,12 @@ export const FetchWeatherDetails = () => (dispatch) =>   {
         location.getCurrentPosition(
             (position) => {
                 weatherApi.get('weather?lat='+position.coords.latitude+'&lon='+position.coords.longitude+'&appid='+process.env.REACT_APP_WEATHER_TOKEN+'&units=metric').then((response) =>{
-                    console.log("fdgdertertertwerwerwerqwqweqweqwe",response)
                     dispatch({type:FETCH_WEATHER_DETAILS,payload:response.data})
               })
             })
     }
     else{
         weatherApi.get('weather?lat=9.791195&lon=76.585490&appid='+process.env.REACT_APP_WEATHER_TOKEN+'&units=metric').then((response) =>{
-            console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",response)
             dispatch({type:FETCH_WEATHER_DETAILS,payload:response.data})
         })
     }

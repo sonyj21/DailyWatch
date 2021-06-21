@@ -15,7 +15,6 @@ const Home = ({FetchTopHeadLines,FetchWeatherDetails,topNews,weatherDetails}) =>
         setWeatherOPen(true)
     },[])
     const handleErrorClose= useCallback(()=>{
-        console.log("ooooooooooooooooooooooooo")
         setWeatherOPen(false)
     },[])
     
